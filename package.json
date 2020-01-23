@@ -1,0 +1,37 @@
+{
+  "name": "codeproject",
+  "version": "1.0.0",
+  "description": "API developed to Code Project",
+  "main": "src/server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/greysonmrx/CodeProject-Backend"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "codeproject",
+    "education-platform"
+  ],
+  "author": "GreysonMRX",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "youch": "^2.0.10"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-import-helpers": "^1.0.2",
+    "nodemon": "^2.0.2",
+    "sucrase": "^3.12.1"
+  }
+}
