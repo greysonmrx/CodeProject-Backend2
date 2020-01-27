@@ -2,15 +2,8 @@ import bcrypt from 'bcryptjs';
 import request from 'supertest';
 
 import app from '../../src/app';
-import User from '../../src/app/models/User';
+import factory from '../factories';
 import truncate from '../utils/truncate';
-
-const data = {
-  first_name: 'Greyson',
-  last_name: 'Filho',
-  email: 'greysonmrx@gmail.com',
-  unencrypted_password: '123456'
-};
 
 describe('User', () => {
   beforeEach(async () => {
@@ -18,32 +11,35 @@ describe('User', () => {
   });
 
   it('should be able to register', async () => {
+    const user = await factory.attrs('User');
+
     const response = await request(app)
       .post('/users')
-      .send(data);
+      .send(user);
 
     expect(response.body).toHaveProperty('id');
   });
 
   it('should not be able to register with duplicated email', async () => {
+    const user = await factory.attrs('User');
+
     await request(app)
       .post('/users')
-      .send(data);
+      .send(user);
 
     const response = await request(app)
       .post('/users')
-      .send(data);
+      .send(user);
 
     expect(response.status).toBe(400);
   });
 
   it('should encrypt user password when new user created', async () => {
-    const user = await User.create(data);
+    const user = await factory.create('User', {
+      unencrypted_password: '123456'
+    });
 
-    const compareHash = await bcrypt.compare(
-      data.unencrypted_password,
-      user.password
-    );
+    const compareHash = await bcrypt.compare('123456', user.password);
 
     expect(compareHash).toBe(true);
   });
