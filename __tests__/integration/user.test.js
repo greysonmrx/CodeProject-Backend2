@@ -17,7 +17,7 @@ describe('User', () => {
         first_name: 'Greyson',
         last_name: 'Filho',
         email: 'greysonmrx@gmail.com',
-        password: '12345'
+        unencrypted_password: '12345'
       });
 
     expect(response.body).toHaveProperty('id');
@@ -30,7 +30,7 @@ describe('User', () => {
         first_name: 'Greyson',
         last_name: 'Filho',
         email: 'greysonmrx@gmail.com',
-        password: '12345'
+        unencrypted_password: '12345'
       });
 
     const response = await request(app)
@@ -39,7 +39,7 @@ describe('User', () => {
         first_name: 'Greyson',
         last_name: 'Filho',
         email: 'greysonmrx@gmail.com',
-        password: '12345'
+        unencrypted_password: '12345'
       });
 
     expect(response.status).toBe(400);
@@ -50,7 +50,7 @@ describe('User', () => {
       first_name: 'Greyson',
       last_name: 'Filho',
       email: 'greysonmrx@gmail.com',
-      password: '12345'
+      unencrypted_password: '12345'
     });
 
     const compareHash = await bcrypt.compare('12345', user.password);
