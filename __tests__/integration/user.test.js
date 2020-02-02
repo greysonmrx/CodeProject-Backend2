@@ -43,4 +43,16 @@ describe('User', () => {
 
     expect(compareHash).toBe(true);
   });
+
+  it('should not be able to register without password', async () => {
+    const user = await factory.attrs('User', {
+      unencrypted_password: null
+    });
+
+    const response = await request(app)
+      .post('/users')
+      .send(user);
+
+    expect(response.status).toBe(400);
+  });
 });
