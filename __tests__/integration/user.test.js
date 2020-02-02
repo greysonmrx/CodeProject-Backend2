@@ -55,4 +55,16 @@ describe('User', () => {
 
     expect(response.status).toBe(400);
   });
+
+  it('should not be able to register if the password is less than six chars', async () => {
+    const user = await factory.attrs('User', {
+      unencrypted_password: '12345'
+    });
+
+    const response = await request(app)
+      .post('/users')
+      .send(user);
+
+    expect(response.status).toBe(400);
+  });
 });
